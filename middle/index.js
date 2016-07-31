@@ -1,0 +1,23 @@
+/**
+ * Created by Dankuer on 2016/7/31.
+ */
+module.exports={
+    //要求未登陆
+    checkNotLogin(req,res,next){
+      if(req.session.user){
+          req.flash('error','已经登陆！');
+          res.redirect('/');
+      }else{
+          next();
+      }
+    },
+    //要求登陆
+    checkLogin(req,res,next){
+        if(req.session.user){
+            next();
+        }else{
+            req.flash('error','未登陆！');
+            res.redirect('/users/login');
+        }
+    }
+}

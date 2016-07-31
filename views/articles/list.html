@@ -1,0 +1,23 @@
+<%include ../include/header.html%>
+<div class="container">
+<%
+    articles.forEach(function(article){%>
+
+
+
+    <div class="media col-sm-offset-4">
+        <div class="media-left">
+            <a href="#">
+                <img class="media-object" src="<%=article.user.avatar%>" alt="...">
+            </a>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading"><a href="/articles/detail/<%=article._id%>"><%=article.title%></a></h4>
+            <p><%-article.content%></p>
+        </div>
+        <div class="media-footer">作者:<%=article.user.username%></div>
+    </div>
+
+<%});%>
+</div>
+<% include ../include/footer.html%>

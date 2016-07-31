@@ -14,6 +14,7 @@ var MongoStore=require('connect-mongo')(session);
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var articles=require('./routes/articles');
+var flash=require('connect-flash');
 
 var app = express();
 
@@ -35,7 +36,7 @@ app.use(session({
         url:settings.url
     })
 }));
-
+app.use(flash());
 //设置静态服务器
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -43,8 +44,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req,res,next){
     //res.locals
     res.locals.user=req.session.user;
+    res.locals.success=req.flash('success').toString();
+    res.locals.error=req.flash('error').toString();
     next();
-})
+});
 app.use('/', routes);
 app.use('/users', users);
 app.use('/articles',articles);

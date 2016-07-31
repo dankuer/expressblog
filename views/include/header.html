@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>珠峰博客</title>
+    <title><%=title%></title>
     <link href="/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
@@ -27,17 +27,26 @@
     <!-- 放置其它的导航条 -->
     <div class="collapse navbar-collapse" id="menus">
         <ul class="nav navbar-nav">
-            <%=if(user){%>
+            <% if(user){ %>
                 <li><a href="/articles/add">发表文章</a></li>
                 <li><a href="/users/logout">登出</a></li>
-            <%=}else%{>
+            <% }else{ %>
                 <li class="active"><a href="/users/reg">注册</a></li>
                 <li><a href="/users/login">登录</a></li>
-            <%=}%>
+            <% } %>
         </ul>
-        <ul class="nav navbar-nav narbar-right">
-            <li><%=user.username%></li>
-            <li><img src="<%=user.avatar%>" alt=""></li>
-        </ul>
+        <% if(user){ %>
+        <ul class="nav navbar-collapse navbar-nav navbar-right">
+        <li><a href=""><img src="<%=user.avatar%>" class="img-rounded"></a></li>
+        <li><a href=""><%=user.username%></a></li>
+
+    </ul>
+        <% } %>
     </div>
 </nav>
+<%if(success){%>
+<div class="alert alert-success container" role="alert"><%=success%></div>
+<%}%>
+<%if(error){%>
+<div class="alert alert-danger container" role="alert"><%=error%></div>
+<%}%>
